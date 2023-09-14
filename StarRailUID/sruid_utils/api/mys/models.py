@@ -1,0 +1,439 @@
+from typing import Any, Dict, List, Union, TypedDict
+
+################
+# 抽卡记录相关 #
+################
+
+
+class SingleGachaLog(TypedDict):
+    uid: str
+    gacha_id: str
+    gacha_type: str
+    item_id: str
+    count: str
+    time: str
+    name: str
+    lang: str
+    item_type: str
+    rank_type: str
+    id: str
+
+
+class GachaLog(TypedDict):
+    page: str
+    size: str
+    list: List[SingleGachaLog]
+    region: str
+    region_time_zone: int
+
+
+class RoleBasicInfo(TypedDict):
+    avatar: str
+    nickname: str
+    region: str
+    level: int
+
+
+################
+# 模拟宇宙相关 #
+################
+
+
+class RogueTime(TypedDict):
+    year: int
+    month: int
+    day: int
+    hour: int
+    minute: int
+    second: int
+
+
+class RogueAvatar(TypedDict):
+    id: int
+    icon: str
+    level: int
+    rarity: int
+    element: str
+
+
+class RogueBaseType(TypedDict):
+    id: int
+    name: str
+    cnt: int
+
+
+class RogueBuffitems(TypedDict):
+    id: int
+    name: str
+    is_evoluted: str
+    rank: int
+
+
+class RogueMiracles(TypedDict):
+    id: int
+    name: str
+    icon: str
+
+
+class RogueBuffs(TypedDict):
+    base_type: RogueBaseType
+    items: List[RogueBuffitems]
+
+
+class RogueRecordInfo(TypedDict):
+    name: str
+    finish_time: RogueTime
+    score: int
+    final_lineup: List[RogueAvatar]
+    base_type_list: List[RogueBaseType]
+    cached_avatars: str
+    buffs: List[RogueBuffs]
+    miracles: List[RogueMiracles]
+    difficulty: int
+    progress: int
+    detail_h: Union[int, None]
+    start_h: Union[int, None]
+
+
+class RogueBasic(TypedDict):
+    id: int
+    finish_cnt: int
+    schedule_begin: RogueTime
+    schedule_end: RogueTime
+
+
+class RogueRecord(TypedDict):
+    basic: RogueBasic
+    records: List[RogueRecordInfo]
+
+
+class RogueBasicInfo(TypedDict):
+    unlocked_buff_num: int
+    unlocked_miracle_num: int
+    unlocked_skill_points: int
+
+
+class LocustCntInfo(TypedDict):
+    narrow: int
+    miracle: int
+    event: int
+
+
+class LocustDestinyInfo(TypedDict):
+    id: int
+    desc: str
+    level: int
+
+
+class LocustBasicInfo(TypedDict):
+    cnt: LocustCntInfo
+    destiny: List[LocustDestinyInfo]
+
+
+class RoleInfo(TypedDict):
+    server: str
+    nickname: str
+    level: int
+
+
+class LocustBlocks(TypedDict):
+    block_id: int
+    name: str
+    num: int
+
+
+class LocustFury(TypedDict):
+    type: int
+    point: str
+
+
+class LocustRecordInfo(TypedDict):
+    name: str
+    finish_time: RogueTime
+    final_lineup: List[RogueAvatar]
+    base_type_list: List[RogueBaseType]
+    cached_avatars: List[RogueAvatar]
+    buffs: List[RogueBuffs]
+    miracles: List[RogueMiracles]
+    blocks: List[LocustBlocks]
+    worm_weak: Union[str, str]
+    difficulty: int
+    fury: LocustFury
+    detail_h: Union[int, None]
+    start_h: Union[int, None]
+
+
+class LocustRecord(TypedDict):
+    records: List[LocustRecordInfo]
+
+
+class RogueData(TypedDict):
+    role: RoleInfo
+    basic_info: RogueBasicInfo
+    current_record: RogueRecord
+    last_record: RogueRecord
+
+
+class RogueLocustData(TypedDict):
+    role: RoleInfo
+    basic: LocustBasicInfo
+    detail: LocustRecord
+
+
+################
+#   深渊相关   #
+################
+
+
+class AbyssTime(TypedDict):
+    year: int
+    month: int
+    day: int
+    hour: int
+    minute: int
+
+
+class AbyssAvatar(TypedDict):
+    id: int
+    level: int
+    icon: str
+    rarity: int
+    element: str
+
+
+class AbyssNodeDetail(TypedDict):
+    challenge_time: AbyssTime
+    avatars: List[AbyssAvatar]
+
+
+class AbyssFloorDetail(TypedDict):
+    name: str
+    round_num: int
+    star_num: int
+    node_1: List[AbyssNodeDetail]
+    node_2: List[AbyssNodeDetail]
+
+
+class AbyssData(TypedDict):
+    schedule_id: int
+    begin_time: AbyssTime
+    end_time: AbyssTime
+    star_num: int
+    max_floor: str
+    battle_num: int
+    has_data: bool
+    max_floor_detail: bool
+    all_floor_detail: List[AbyssFloorDetail]
+
+
+################
+# 每月札记相关 #
+################
+
+
+class DataText(TypedDict):
+    type: str
+    key: str
+    mi18n_key: str
+
+
+class DayData(TypedDict):
+    current_hcoin: int
+    current_rails_pass: int
+    last_hcoin: int
+    last_rails_pass: int
+
+
+class GroupBy(TypedDict):
+    action: str
+    num: int
+    percent: int
+    action_name: str
+
+
+class MonthData(TypedDict):
+    current_hcoin: int
+    current_rails_pass: int
+    last_hcoin: int
+    last_rails_pass: int
+    hcoin_rate: int
+    rails_rate: int
+    group_by: List[GroupBy]
+
+
+class MonthlyAward(TypedDict):
+    uid: str
+    region: str
+    login_flag: bool
+    optional_month: List[int]
+    month: str
+    data_month: str
+    month_data: MonthData
+    day_data: DayData
+    version: str
+    start_month: str
+    data_text: DataText
+
+
+################
+# 实时便签 #
+################
+class Expedition(TypedDict):
+    avatars: List[str]  # 头像Url
+    status: str
+    remaining_time: int
+    name: str
+
+
+class DailyNoteData(TypedDict):
+    current_stamina: int
+    max_stamina: int
+    stamina_recover_time: int
+    accepted_expedition_num: int
+    total_expedition_num: int
+    expeditions: List[Expedition]
+
+
+class WidgetStamina(TypedDict):
+    current_stamina: int
+    max_stamina: int
+    stamina_recover_time: int
+    accepted_expedition_num: int
+    total_expedition_num: int
+    expeditions: List[Expedition]
+    current_train_score: int
+    max_train_score: int
+    current_rogue_score: int
+    max_rogue_score: int
+    has_signed: bool
+    sign_url: str
+    home_url: str
+    note_url: str
+
+
+################
+# 签到相关 #
+################
+class MysSign(TypedDict):
+    code: str
+    risk_code: int
+    gt: str
+    challenge: str
+    success: int
+    is_risk: bool
+
+
+class SignInfo(TypedDict):
+    total_sign_day: int
+    today: str
+    is_sign: bool
+    is_sub: bool
+    region: str
+    sign_cnt_missed: int
+    short_sign_day: int
+
+
+class SignAward(TypedDict):
+    icon: str
+    name: str
+    cnt: int
+
+
+class SignExtraAward(TypedDict):
+    has_extra_award: bool
+    start_time: str
+    end_time: str
+    list: List[Any]  # TODO
+    start_timestamp: str
+    end_timestamp: str
+
+
+class SignList(TypedDict):
+    month: int
+    awards: List[SignAward]
+    biz: str
+    resign: bool
+    short_extra_award: SignExtraAward
+
+
+#####################
+# 基础信息 角色信息 #
+####################
+
+
+class Stats(TypedDict):
+    active_days: int
+    avatar_num: int
+    achievement_num: int
+    chest_num: int
+    abyss_process: str
+
+
+class AvatarListItem(TypedDict):
+    id: int
+    level: int
+    name: str
+    element: str
+    icon: str
+    rarity: int
+    rank: int
+    is_chosen: bool
+
+
+class RoleIndex(TypedDict):
+    stats: Stats
+    avatar_list: List[AvatarListItem]
+
+
+################
+# 角色详细信息 #
+################
+
+
+class Equip(TypedDict):
+    id: int
+    level: int
+    rank: int
+    name: str
+    desc: str
+    icon: str
+
+
+class RelicsItem(TypedDict):
+    id: int
+    level: int
+    pos: int
+    name: str
+    desc: str
+    icon: str
+    rarity: int
+
+
+class RanksItem(TypedDict):
+    id: int
+    pos: int
+    name: str
+    icon: str
+    desc: str
+    is_unlocked: bool
+
+
+class AvatarListItemDetail(TypedDict):
+    id: int
+    level: int
+    name: str
+    element: str
+    icon: str
+    rarity: int
+    rank: int
+    image: str
+    equip: Union[Equip, None]
+    relics: List[RelicsItem]
+    ornaments: List
+    ranks: List[RanksItem]
+
+
+class AvatarInfo(TypedDict):
+    avatar_list: List[AvatarListItemDetail]
+    equip_wiki: Dict[str, str]
+    relic_wiki: Dict
