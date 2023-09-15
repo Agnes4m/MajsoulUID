@@ -22,7 +22,7 @@ requires = ["poetry-core>=1.2.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "StarRailUID"
+name = "MajsoulUID"
 version = "0.1.0"
 description = ""
 authors = ["Agnes Digital <Z735803792@163.com>"]
